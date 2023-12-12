@@ -5,11 +5,13 @@ class EdgeMap {
 
 	public function __construct($from_pixels) {
 		foreach ($from_pixels as $pixel) {
+			list($x, $y) = $pixel;
+
 			$points = [
-				[$pixel[0], $pixel[1]],
-				[$pixel[0]+1, $pixel[1]],
-				[$pixel[0]+1, $pixel[1]+1],
-				[$pixel[0], $pixel[1]+1]
+				[$x, $y],
+				[$x+1, $y],
+				[$x+1, $y+1],
+				[$x, $y+1]
 			];
 
 			$lines = [

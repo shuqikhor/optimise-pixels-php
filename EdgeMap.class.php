@@ -40,7 +40,7 @@ class EdgeMap {
 		}
 
 		$this->lines = array_values($this->lines);
-		$this->print();
+		// $this->print();
 	}
 
 	// this is to illustrate the outcome, for debugging purpose

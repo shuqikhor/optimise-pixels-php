@@ -18,7 +18,7 @@
 			width: 100%;
 			min-height: 100%;
 			padding: 1rem;
-			border: 1px solid transparent
+			border: 1px solid transparent;
 		}
 		#wrapper.border {
 			border: 1px dashed #cccccc;

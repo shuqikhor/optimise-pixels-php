@@ -16,29 +16,18 @@ workflow:
  - enclose with SVG opening/closing tags
 */
 
+if (empty($_FILES)) {
+	require("form.php");
+	exit;
+}
+
+
 if (isset($_FILES['svg']) && file_exists($_FILES['svg']['tmp_name'])) {
 	require("OptimisePixels.class.php");
 	require("EdgeMap.class.php");
 	require("SVGhelper.php");
 
 	$svg = new OptimisePixels($_FILES['svg']['tmp_name']);
+	$svg->print();
+	exit;
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Optimise Pixels</title>
-</head>
-<body>
-	<form action="index.php" method="post" enctype="multipart/form-data">
-		<div><input type="file" name="svg" id="input-svg" accept="image/svg+xml"></div>
-		<div><button type="submit">Submit</button></div>
-	</form>
-
-	<?php
-		if (isset($svg)) $svg->print();
-	?>
-</body>
-</html>

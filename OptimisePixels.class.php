@@ -89,14 +89,12 @@ class OptimisePixels {
 
 	public function get_html () {
 		$html = "";
-		$html .= "<section class=\"result\">";
 		$svg_base64 = base64_encode($this->result);
 		$html .= "<div><img src=\"data:image/svg+xml;base64,$svg_base64\"></div>";
 		
 		$svg_escaped = str_replace("<", "&lt;", $this->result);
 		$svg_escaped = str_replace(">", "&gt;", $svg_escaped);
 		$html .= "<pre>$svg_escaped</pre>";
-		$html .= "</section>";
 
 		return $html;
 	}

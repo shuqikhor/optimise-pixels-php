@@ -76,7 +76,7 @@ class OptimisePixels {
 			array_push($tags, ...$chunks);
 		}
 
-		$svg_content = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 9 9\" width=\"90\" height=\"90\">\n";
+		$svg_content = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 9 9\">\n";
 		$svg_content .= implode("", $tags);
 		$svg_content .= "</svg>";
 

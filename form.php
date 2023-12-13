@@ -23,6 +23,10 @@
 		#wrapper.border {
 			border: 1px dashed #cccccc;
 		}
+		#result img {
+			width: 90px;
+			height: auto;
+		}
 	</style>
 	<div id="wrapper">
 		<div><input type="file" name="svg" id="input-svg" accept="image/svg+xml"></div>

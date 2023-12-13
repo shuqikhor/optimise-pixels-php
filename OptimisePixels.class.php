@@ -4,6 +4,7 @@ class OptimisePixels {
 	private string $source_svg = "";
 	private string $result = "";
 	private string $icon_name = "";
+	private string $view_box = "";
 
 	public function __construct ($source, $icon_name = "") {
 		$this->source_svg = $source;
@@ -78,7 +79,7 @@ class OptimisePixels {
 			array_push($tags, ...$chunks);
 		}
 
-		$svg_content = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 9 9\">\n";
+		$svg_content = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"{$this->view_box}\">\n";
 		$svg_content .= implode("", $tags);
 		$svg_content .= "</svg>";
 
@@ -113,6 +114,8 @@ class OptimisePixels {
 		$svg = simplexml_load_file($this->source_svg);
 		$svg->registerXPathNamespace('svg', 'http://www.w3.org/2000/svg');
 		$svg->registerXPathNamespace('xlink', 'http://www.w3.org/1999/xlink');
+
+		$this->view_box = strval($svg->attributes()['viewBox'] ?? "");
 		
 		$style = $svg->xpath('.//svg:style');
 		$css_classes = [];

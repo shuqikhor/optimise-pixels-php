@@ -27,7 +27,11 @@ if (isset($_FILES['svg']) && file_exists($_FILES['svg']['tmp_name'])) {
 	require("EdgeMap.class.php");
 	require("SVGhelper.php");
 
-	$svg = new OptimisePixels($_FILES['svg']['tmp_name']);
+	$filename = $_FILES['svg']['name'];
+	$icon_name = str_replace(".svg", "", strtolower($filename));
+	$icon_name = str_replace(" ", "-", $icon_name);
+
+	$svg = new OptimisePixels($_FILES['svg']['tmp_name'], $icon_name);
 	$svg->print();
 	exit;
 }

@@ -3,9 +3,11 @@
 class OptimisePixels {
 	private string $source_svg = "";
 	private string $result = "";
+	private string $icon_name = "";
 
-	public function __construct ($source) {
+	public function __construct ($source, $icon_name = "") {
 		$this->source_svg = $source;
+		$this->icon_name = $icon_name;
 
 		// extract all pixels and group them by colour
 		$pixel_groups = $this->extract_pixels_from_svg();
@@ -90,7 +92,11 @@ class OptimisePixels {
 	public function get_html () {
 		$html = "";
 		$svg_base64 = base64_encode($this->result);
-		$html .= "<div><img src=\"data:image/svg+xml;base64,$svg_base64\"></div>";
+		$html .= "<div>";
+		if (!empty($this->icon_name)) $html .= "<a title=\"Click to download\" download=\"{$this->icon_name}.svg\" href=\"data:image/svg+xml;base64,$svg_base64\">";
+		$html .= "<img src=\"data:image/svg+xml;base64,$svg_base64\">";
+		if (!empty($this->icon_name)) $html .= "</a>";
+		$html .= "</div>";
 		
 		$svg_escaped = str_replace("<", "&lt;", $this->result);
 		$svg_escaped = str_replace(">", "&gt;", $svg_escaped);

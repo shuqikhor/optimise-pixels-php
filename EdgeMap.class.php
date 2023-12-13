@@ -14,19 +14,15 @@ class EdgeMap {
 				[$x, $y+1]
 			];
 
+			// the points in these lines are arranged in top-down left-to-right manner
 			$lines = [
 				[$points[0], $points[1]],
 				[$points[1], $points[2]],
-				[$points[2], $points[3]],
-				[$points[3], $points[0]],
+				[$points[3], $points[2]],
+				[$points[0], $points[3]],
 			];
 
 			foreach ($lines as $line) {
-				// normalise line
-				$a = min($line);
-				$b = max($line);
-				$line = [$a, $b];
-
 				// if not found, add
 				// if found, delete
 				// this will cancel out overlapped lines

@@ -38,4 +38,7 @@ It will then optimise it to:
 </svg>
 ```
 
-To use it, run index.php and upload your .svg file.
+To use it, simply open index.php and upload your SVG file.
+You could also drag and drop your file directly to the page.
+
+Here's a [demo](https://sqkhor.com/pixel-icons/optimise/) but it had some minor tweaks.

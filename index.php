@@ -1,20 +1,12 @@
 <?php
 
-/*
-workflow:
- - extract all pixel blocks (1x1 rect) from SVG
- - group them by colour (this is for performance optimisation)
- - detect boundaries and separate into chunks
- - plot chunk edges
- - plot paths from the edges (some chunks may have >1 paths if there's a hole in them)
- - find out whether is the chunk a rectangle
-    - if rect, convert it to <rect />
-    - if not, convert it to <path />
-       - determine path direction (clockwise for outer shape, ccw for cutouts)
-       - write SVG path
- - sort svg tags by "x" and "y" coordinates
- - enclose with SVG opening/closing tags
-*/
+/* -- replace $_POST when JSON is received from FETCH API -- */
+if (!empty($_SERVER['CONTENT_TYPE']) && preg_match("/application\/json/i", $_SERVER['CONTENT_TYPE'])) {
+	if ($php_input = json_decode(trim(file_get_contents("php://input")), true)) {
+		$_POST = array_merge_recursive($_POST, $php_input);
+	}
+}
+
 
 if (empty($_FILES)) {
 	require("form.php");

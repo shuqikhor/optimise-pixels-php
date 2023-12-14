@@ -1,5 +1,21 @@
 <?php
 
+/*
+	workflow:
+	- extract all pixel blocks (1x1 rect) from SVG
+	- group them by colour (this is for performance optimisation)
+	- detect boundaries and separate into chunks
+	- plot chunk edges
+	- plot paths from the edges (some chunks may have >1 paths if there's a hole in them)
+	- find out whether is the chunk a rectangle
+		- if rect, convert it to <rect />
+		- if not, convert it to <path />
+		- determine path direction (clockwise for outer shape, ccw for cutouts)
+		- write SVG path
+	- sort svg tags by "x" and "y" coordinates
+	- enclose with SVG opening/closing tags
+*/
+
 class OptimisePixels {
 	private string $source_svg = "";
 	private string $result = "";
@@ -79,7 +95,8 @@ class OptimisePixels {
 			array_push($tags, ...$chunks);
 		}
 
-		$svg_content = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"{$this->view_box}\">\n";
+		$svg_class = empty($this->icon_name) ? "" : " class=\"pixelicon-{$this->icon_name}\"";
+		$svg_content = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"{$this->view_box}\"$svg_class>\n";
 		$svg_content .= implode("", $tags);
 		$svg_content .= "</svg>";
 
